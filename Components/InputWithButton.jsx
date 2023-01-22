@@ -8,11 +8,14 @@ import {
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
-const ToDoInput = ({
+const InputWithButton = ({
   value = "",
   placeholder = "",
   onPress = null,
   onChangeText = null,
+  buttonName = "",
+  buttonColor = "",
+  buttonSize = 24,
 }) => (
   <View style={styles.textInputContainer}>
     <TextInput
@@ -22,7 +25,7 @@ const ToDoInput = ({
       onChangeText={onChangeText}
     />
     <TouchableOpacity style={styles.addButton} onPress={onPress}>
-      <AntDesign name={"pluscircle"} size={24} color={"black"} />
+      <AntDesign name={buttonName} size={buttonSize} color={buttonColor} />
     </TouchableOpacity>
   </View>
 );
@@ -46,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ToDoInput;
+export default InputWithButton;

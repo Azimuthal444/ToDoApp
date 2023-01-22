@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, FlatList, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ToDoInput from "../Components/ToDoInput";
+import InputWithButton from "../Components/InputWithButton";
 
 const Home = () => {
   const [list, setList] = useState([]);
@@ -9,7 +9,7 @@ const Home = () => {
 
   const onPressAdd = () => {
     if (inputValue.trim() !== "") {
-      setList([...list, inputValue]);
+      setList([...list, { id: list.length + 1, value: inputValue }]);
       setInputValue("");
     }
   };
@@ -24,14 +24,23 @@ const Home = () => {
           flexDirection: "row",
         }}
       >
-        <ToDoInput
+        <InputWithButton
           value={inputValue}
           placeholder={"Add a task"}
           onPress={onPressAdd}
           onChangeText={(text) => setInputValue(text)}
+          buttonName={"pluscircle"}
+          buttonColor={"#4681f4"}
         />
       </View>
-      <View style={{ flex: 80, backgroundColor: "orange" }} />
+
+      <View style={{ flex: 80, backgroundColor: "orange" }}>
+        <FlatList
+          data={list}
+          renderItem={({ item }) => <Item title={item.title} />}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
     </SafeAreaView>
   );
 };

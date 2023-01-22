@@ -12,6 +12,7 @@
     "@expo/vector-icons": "^13.0.0",
     "@react-navigation/bottom-tabs": "^6.5.3",
     "@react-navigation/native": "^6.1.2",
+    "@reduxjs/toolkit": "^1.9.1",
     "@types/react-native": "^0.71.0",
     "expo": "^47.0.13",
     "expo-status-bar": "~1.4.2",

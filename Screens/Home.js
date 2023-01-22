@@ -61,7 +61,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#CBE1EF",
+    backgroundColor: "#fff",
   },
   inputViewContainer: {
     flex: 20,

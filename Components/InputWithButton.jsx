@@ -16,13 +16,21 @@ const InputWithButton = ({
   buttonName = "",
   buttonColor = "",
   buttonSize = 24,
+  editable = true,
+  disableBorderWidth = false,
 }) => (
-  <View style={styles.textInputContainer}>
+  <View
+    style={[
+      styles.textInputContainer,
+      disableBorderWidth && { borderWidth: 0 },
+    ]}
+  >
     <TextInput
       placeholder={placeholder}
       style={styles.textInput}
       value={value}
       onChangeText={onChangeText}
+      editable={editable}
     />
     <TouchableOpacity style={styles.addButton} onPress={onPress}>
       <AntDesign name={buttonName} size={buttonSize} color={buttonColor} />

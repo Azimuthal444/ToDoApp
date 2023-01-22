@@ -9,21 +9,21 @@ const Home = () => {
 
   const onPressAdd = () => {
     if (inputValue.trim() !== "") {
-      setList([...list, { id: list.length + 1, value: inputValue }]);
+      setList([...list, { id: Date.now(), value: inputValue }]);
       setInputValue("");
     }
   };
 
+  const onPressRemove = (idToBeDeleted) => {
+    const indexOfItem = list.findIndex(({ id }) => id === idToBeDeleted);
+    newArray = Array.from(list);
+    newArray.splice(indexOfItem, 1);
+    setList([...newArray]);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <View
-        style={{
-          flex: 20,
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "row",
-        }}
-      >
+      <View style={styles.inputViewContainer}>
         <InputWithButton
           value={inputValue}
           placeholder={"Add a task"}
@@ -34,11 +34,22 @@ const Home = () => {
         />
       </View>
 
-      <View style={{ flex: 80, backgroundColor: "orange" }}>
+      <View style={styles.flatListContainer}>
         <FlatList
+          contentContainerStyle={{ alignItems: "center" }}
           data={list}
-          renderItem={({ item }) => <Item title={item.title} />}
+          renderItem={({ item }) => (
+            <InputWithButton
+              value={item.value}
+              buttonName={"minuscircle"}
+              buttonColor={"#D2686E"}
+              editable={false}
+              disableBorderWidth
+              onPress={() => onPressRemove(item.id)}
+            />
+          )}
           keyExtractor={(item) => item.id}
+          keyboardShouldPersistTaps="always"
         />
       </View>
     </SafeAreaView>
@@ -52,4 +63,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#CBE1EF",
   },
+  inputViewContainer: {
+    flex: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  flatListContainer: { flex: 80 },
 });
